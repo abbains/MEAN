@@ -1,0 +1,75 @@
+<div class="jumbotron jumbotron-fluid">
+
+  <div class="container">
+    <h1 style="float: right;"> Basic MEAN </h1>
+    <div class="card" style="width: 10rem;">
+
+      <img
+        src="https://media-exp2.licdn.com/mpr/mpr/shrink_100_100/AAIA_wDGAAAAAQAAAAAAAAtkAAAAJGYxNmY2MGRmLTNmMmQtNDE0Yy1hMWU0LTUxMGNiMzNjOTY5OA.jpg"
+        class="card-img-top">
+      <p class="card-text">
+        <small>By: Akshay Bains</small>
+      </p>
+    </div>
+    <br>
+    <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm.value)">
+      <div class="form-group">
+        <label>Product Name<span class="red-text">*</span></label>
+        <input class="form-control" name="productname" placeholder="Product Name-(requied)" required="required" ngModel>
+      </div>
+      <div class="form-group">
+        <label>Product Description<span class="red-text">*</span></label>
+        <textarea class="form-control" name="productdescription"
+                  placeholder="Please write your description here-(required)" rows="3" ngModel
+                  required="required">  </textarea>
+      </div>
+
+      <input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit"/>
+    </form>
+    <br>
+    <br>
+    <br>
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let product of products; let i = index"
+          class="list-group-item list-group-item-action list-group-item-light">{{i+1}}. {{ product.productdescription}}
+        By - {{product.productname}}
+        <div>
+          <button class="btn btn-danger" style="float: right" (click)="delete (product._id)">Delete</button>
+
+        </div>
+
+
+        <button class="btn btn-info" style="float: right" (click)="open(content)">Update</button>
+
+      </li>
+
+    </ul>
+
+  </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Update Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="modal-body">
+      <form #productmodalForm="ngForm" (ngSubmit)="onSubmit(productmodalForm.value)">
+        <div class="form-group">
+          <label>Product Name<span class="red-text">*</span></label>
+          <input class="form-control" name="productmodalname" placeholder="Product Name-(requied)" required="required"
+                 ngModel>
+        </div>
+        <div class="form-group">
+          <label>Product Description<span class="red-text">*</span></label>
+          <textarea class="form-control" name="productdmodalescription"
+                    placeholder="Please write your description here-(required)" rows="1" ngModel
+                    required="required"> </textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
+    </div>
+  </div>
+</ng-template>
